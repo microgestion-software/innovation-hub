@@ -173,4 +173,4 @@ Para una explicación detallada de los cambios realizados durante la migración,
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE.md](LICENSE.md) para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo [LICENSE](../../../LICENSE) para más detalles.
