@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<mappingRoot xmlns="http://www.ibm.com/2008/ccl/Mapping" xmlns:map="default" domainID="com.ibm.msl.mapping.xml" domainIDExtension="mb" mainMap="true" targetNamespace="default" version="8.0.5.0">
+    <inlinedXMLSchema><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        
+  
+  <xsd:element name="branchId" type="xsd:string"/>
+    
+
+</xsd:schema>
+]]></inlinedXMLSchema>
+    <input path="jar:file://!com/ibm/etools/mft/map/xsds/predefined/JsonDomainMsg.xsd" var="var"/>
+    <input derivedFrom="MB:JSON_schema_in_swagger_document" path="/openapi.json" var="var1"/>
+    <input inlinedXMLSchema="true" path="../schema_0.xsd" var="var2"/>
+    <output path="mbsharedlib://DemoSalesLib/BranchSalesReport.xsd"/>
+    <namespaces>
+        <namespace kind="supplement" prefix="in" uri="http://www.ibm.com/iib/msl/json"/>
+    </namespaces>
+    <generation engine="xquery"/>
+    <mappingDeclaration name="postReport_Mapping">
+        <input derivedFrom="MB:JSON_operation_name:postReport" namespace="http://www.ibm.com/iib/msl/json" path="$var/mb:msg(JSON,assembly,JSON,LocalEnvironment,Properties,HTTPInputHeader)" var="ComIbmMessageAssembly_JSON">
+            <cast derivedFrom="MB:JSON_operation_request" path="$ComIbmMessageAssembly_JSON/JSON/Data/type('anyType')" qualifier="{http://www.ibm.com/iib/msl/json}BranchSalesReport" ref="var1"/>
+            <cast derivedFrom="MB:JSON_path_query_parm:branchId" path="$ComIbmMessageAssembly_JSON/LocalEnvironment/REST/Input/Parameters/any" qualifier="branchId" ref="var2"/>
+        </input>
+        <output namespace="http://example.microgestion.com/BranchSalesReport" path="mb:msg(BranchSalesReport,assembly,XMLNSC,Properties,HTTPInputHeader)" var="MessageAssembly"/>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/branchId"/>
+            <output path="$MessageAssembly/BranchSalesReport/branchId"/>
+        </move>
+        <convert defaultValue="0.0">
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/totalSales" var="totalSales"/>
+            <output path="$MessageAssembly/BranchSalesReport/totalSales"/>
+        </convert>
+        <convert defaultValue="2002-01-01">
+            <input path="$ComIbmMessageAssembly_JSON/JSON/spath('Data',2)/reportDate"/>
+            <output path="$MessageAssembly/BranchSalesReport/reportDate"/>
+        </convert>
+        <move>
+            <input path="$ComIbmMessageAssembly_JSON/Properties" var="Properties"/>
+            <output path="$MessageAssembly/Properties"/>
+            <override>
+                <assign value="{DemoSalesLib}">
+                    <output path="$MessageAssembly/Properties/MessageSet"/>
+                </assign>
+                <assign value="MQSTR">
+                    <output path="$MessageAssembly/Properties/MessageFormat"/>
+                </assign>
+            </override>
+        </move>
+    </mappingDeclaration>
+</mappingRoot>
