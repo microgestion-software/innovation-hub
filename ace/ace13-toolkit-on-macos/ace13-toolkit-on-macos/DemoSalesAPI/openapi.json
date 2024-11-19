@@ -1,0 +1,70 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Demo Sales API",
+    "version": "1.0.0",
+    "description": "Demo Sales REST API"
+  },
+  "servers": [
+    {
+      "url": "/sales/api/v1"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "BranchSalesReport": {
+        "title": "Sales report from a branch.",
+        "type": "object",
+        "properties": {
+          "reportDate": {
+            "type": "string",
+            "title": "Branch sales report date"
+          },
+          "branchId": {
+            "type": "string",
+            "title": "Branch Id"
+          },
+          "totalSales": {
+            "type": "number",
+            "title": "Branch total sales"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/branch/{branchId}/report": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "success"
+          }
+        },
+        "parameters": [],
+        "summary": "Create a new branch sales report",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BranchSalesReport",
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        }
+      },
+      "summary": "Branch sales report",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "branchId",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  }
+}

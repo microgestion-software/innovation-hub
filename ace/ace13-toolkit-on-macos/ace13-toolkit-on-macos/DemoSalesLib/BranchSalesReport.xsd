@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://example.microgestion.com/BranchSalesReport"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://example.microgestion.com/BranchSalesReport">
+	<element name="BranchSalesReport">
+		<complexType>
+			<sequence>
+				<element name="reportDate" type="date" />
+				<element name="branchId" type="string" />
+				<element name="totalSales" type="decimal" />
+			</sequence>
+		</complexType>
+	</element>
+</schema>
