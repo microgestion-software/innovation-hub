@@ -4,6 +4,21 @@ Welcome to the Innovation Hub by MicroGestion Software. This repository showcase
 
 ## Project Categories
 
+### Design Patterns
+
+Examples and projects that demonstrate the implementation of design patterns, showcasing their key features and functionality.
+
+#### Resilience Patterns
+- [Spring Boot WebFlux API with Rate Limiting using Resilience4J](./patterns/resilience/spring-boot-resilience4j-rate-limiting)
+
+### IBM Cloud Pak for Integration
+
+Examples, guides, and projects demonstrating installation procedures and reference implementations for Cloud Pak for Integration (CP4I) components.
+
+#### IBM App Connect Enterprise (ACE)
+- [ACE 13 Toolkit MacOS Setup with Containerized IBM MQ](./ace/ace13-toolkit-on-macos)
+
+
 ### OpenRewrite Recipes and Transformations
 
 Examples and projects utilizing OpenRewrite recipes for various code transformations, including updates, migrations, and technical debt reduction.

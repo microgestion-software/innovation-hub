@@ -1,4 +1,4 @@
-# Sample Rate Limited Customer API
+# Spring Boot WebFlux API with Rate Limiting using Resilience4J
 
 A Spring Boot WebFlux application that implements a rate-limited REST API for customer management using Resilience4j.
 
@@ -97,11 +97,11 @@ resilience4j.ratelimiter:
 - **configs**: Defines the default configuration for rate limiters.
 
   - **default**: The default configuration settings.
+    - **eventConsumerBufferSize**: The size of the event consumer buffer (100).
     - **registerHealthIndicator**: Registers a health indicator for the rate limiter.
-    - **limitForPeriod**: The maximum number of calls allowed during a refresh period (2d)d.
+    - **limitForPeriod**: The maximum number of calls allowed during a refresh period (2).
     - **limitRefreshPeriod**: The period after which the rate limiter's state is reset (60 sec).
     - **timeoutDuration**: The maximum time a thread waits for permission (2 sec).
-    - **eventConsumerBufferSize**: The size of the event consumer buffer (100).
 - **instances**: Defines specific rate limiter instances.
   - **customerWriteRateLimit**: Uses the default configuration.
   - **customerServiceRateLimit**: Custom configuration for the customerServiceRateLimit instance.
@@ -164,10 +164,12 @@ psql -h localhost -p 15432 -U app_user -d customerdb
 │   │   ├── java/com/microgestion/example/patterns/resilience/api
 │   │   │   ├── config/       # Configuration classes
 │   │   │   ├── controller/   # REST controllers
-│   │   │   ├── model/       # Domain models
-│   │   │   ├── repository/  # Data access
-│   │   │   └── service/     # Business logic
+│   │   │   ├── exceptions/   # Exception handling
+│   │   │   ├── model/        # Domain models
+│   │   │   ├── repository/   # Data access
+│   │   │   └── service/      # Business logic
 │   │   └── resources/
+│   │       ├── application-test.yml
 │   │       └── application.yml
 │   └── test/
 ├── .devcontainer/          # Development container config
@@ -197,4 +199,4 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ## License
 
-This project is licensed under the MIT License
+This project is licensed under the MIT License - see the [LICENSE](../../../LICENSE) file for details.
