@@ -1,0 +1,47 @@
+{
+    "name": "Java 21 & PostgreSQL Development",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "redhat.vscode-yaml",
+                "GitHub.copilot",
+                "mtxr.sqltools-driver-pg",
+                "mtxr.sqltools",
+                "pivotal.vscode-spring-boot",
+                "vscjava.vscode-spring-boot-dashboard",
+                "vscjava.vscode-spring-initializr",
+                "redhat.java",
+                "visualstudioexptteam.vscodeintellicode",
+                "gabrielbb.vscode-lombok",
+                "eamodio.gitlens"
+            ],
+            "settings": {
+                "java.configuration.updateBuildConfiguration": "automatic",
+                "java.server.launchMode": "Standard",
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.organizeImports": true
+                }
+            }
+        }
+    },
+    "forwardPorts": [
+        8080,
+        5432
+    ],
+    "postCreateCommand": "java -version && mvn --version",
+    "remoteUser": "vscode",
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "21",
+            "installMaven": true,
+            "mavenVersion": "3.9.9"
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/git:1": {}
+    }
+}

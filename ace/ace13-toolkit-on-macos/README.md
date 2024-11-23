@@ -111,4 +111,6 @@ The `mq4ace13-config.mqsc` file creates several system queues required for ACE f
 
 ## License
 
+This project is licensed under the MIT License - see the [LICENSE](../../../LICENSE) file for details.
+
 Please ensure you accept the IBM license terms when using the software components.

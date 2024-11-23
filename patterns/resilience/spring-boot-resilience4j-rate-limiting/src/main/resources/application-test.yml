@@ -1,0 +1,35 @@
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb;DB_CLOSE_DELAY=-1
+    username: sa
+    password: 
+  test:
+    mockmvc:
+      print: default
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      registerHealthIndicator: true
+      limitForPeriod: 2
+      limitRefreshPeriod: 60s
+      timeoutDuration: 60s
+      eventConsumerBufferSize: 100
+  instances:
+    customerService:
+      limitForPeriod: 2
+      limitRefreshPeriod: 60s
+      timeoutDuration: 0s
+      registerHealthIndicator: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

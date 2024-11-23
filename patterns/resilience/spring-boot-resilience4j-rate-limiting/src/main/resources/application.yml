@@ -1,0 +1,62 @@
+# Configuring the database
+spring:
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/customerdb
+    username: app_user
+    password: app_password
+    pool:
+      initial-size: 5
+      max-size: 10
+    properties:
+      schema: public
+
+# Configuring the server
+server:
+  port: 8080
+
+
+# Configuring the actuator
+management:
+  server:
+    port: 9001
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: health
+  health:
+    ratelimiters:
+      enabled: true
+
+# Configuring the rate limiter
+resilience4j.ratelimiter:
+    configs:
+        default:
+            eventConsumerBufferSize: 100
+            registerHealthIndicator: true
+            limitForPeriod: 2
+            limitRefreshPeriod: 60s
+            timeoutDuration: 2s
+    instances:
+        customerWriteRateLimit:
+            baseConfig: default
+        customerServiceRateLimit:
+            registerHealthIndicator: true
+            limitForPeriod: 5
+            limitRefreshPeriod: 60s
+            timeoutDuration: 0s
+
+# Documenting the API
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tagsSorter: alpha
+    operationsSorter: method
+  show-actuator: true
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
